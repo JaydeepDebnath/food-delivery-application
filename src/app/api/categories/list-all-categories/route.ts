@@ -6,7 +6,7 @@ import dbConnect from "@/lib/dbConnect";
 import { authOptions } from "../../auth/[...nextauth]/options";
 
 
-export async function GET(request:NextApiRequest,response:NextApiResponse){
+export async function GET(request:Request,response:NextApiResponse){
  try {
   await dbConnect();
   const session = await getServerSession(authOptions)

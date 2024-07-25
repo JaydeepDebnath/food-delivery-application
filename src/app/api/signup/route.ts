@@ -61,6 +61,7 @@ export async function POST (request : Request){
        email,
        contactNumber,
        location,
+       //role,
        password:hashedPassword,
        verifyCode:verifyCode,
        verifyCodeExpiry:expiryDate,
