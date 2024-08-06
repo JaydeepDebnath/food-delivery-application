@@ -1,8 +1,34 @@
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/model/UserModel";
+import { User as UserInfo } from "@/model/UserModel";
 import { User } from "next-auth";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/options";
+
+export async function PUT(req:Request){
+ await dbConnect()
+ const data = await req.json()
+ const {_id, username,fullname,contactNumber} = data;
+
+ let filtered = {};
+ if(_id){
+  filtered = {_id}
+ }
+ else {
+  const session = await getServerSession(authOptions)
+  const email = session?.user.email;
+  filtered = {email}
+ }
+
+ const user = await UserModel.findOne(filtered);
+ await UserModel.updateOne(filtered,{username,fullname,contactNumber});
+ await UserModel.findOneAndUpdate({email:user?.email})
+ return Response.json({
+  message: 'User data Updated',
+  success:false,
+}, {status:200});
+
+}
 
 export async function GET (request:Request){
   await dbConnect()
