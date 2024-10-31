@@ -2,7 +2,7 @@ import React from 'react'
 
 function LogoIconImg() {
   return (
-    <img src='../../data/img.png' alt='Logo' className='w-100px h-auto'/>
+    <img src="https://i.ibb.co/89qmBQS/Charcoal-White-Illustration-Restaurant-Logo.png"></img>
   )
 }
 
